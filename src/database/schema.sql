@@ -1,0 +1,22 @@
+CREATE DATABASE codeshDb;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  nome VARCHAR  NOT NULL,
+  email VARCHAR  NOT NULL UNIQUE,
+  senha VARCHAR  NOT NULL
+);
+     
+CREATE TABLE IF NOT EXISTS sales (
+ id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+ tipo INTEGER NOT NULL,
+ data VARCHAR NOT NULL,
+ produto VARCHAR NOT NULL,
+ valor   INTEGER NOT NULL,
+ vendedor VARCHAR NOT NULL,
+ user_id UUID,
+ FOREIGN KEY(user_id) REFERENCES  users(id)
+);
+

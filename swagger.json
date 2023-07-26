@@ -1,0 +1,302 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Products",
+    "description": "Documentation from products api",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+
+  "paths": {
+    
+    "/users": {
+
+      "post": {
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "senh": {
+                    "type": "number",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "nome": "lucas",
+                  "email": "email@gmail.com",
+                  "senha": "umasenha"
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "501": {
+          "description": "values error"
+        },
+        "200": {
+          "description": "created"
+        }
+       }
+      },
+
+     "get": {
+        "tags": ["Users"],
+        "responses": {
+        "200": {
+          "description": "OK"
+        }
+       }
+      },
+
+      "delete": {
+        "tags": ["Users"],
+        "responses": {
+        "200": {
+          "description": "tabela limpa com sucesso"
+        }
+       }
+      }
+
+    },
+
+    "/findUser": {
+      "post": {
+        "tags": ["FindUser"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "senh": {
+                    "type": "number",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "nome": "lucas",
+                  "email": "email@gmail.com",
+                  "senha": "umasenha"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "501": {
+            "description": "usuario não encontrado"
+          },
+          "201": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/recoverUser": {
+
+      "put": {
+        "tags": ["RecoverUSer"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "senhaAtual": {
+                    "type": "number",
+                    "required": true
+                  },
+                  "novaSenha": {
+                    "type": "number",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "nome": "lucas",
+                  "email": "email@gmail.com",
+                  "senhaAtual": "umaSenhaAtual",
+                  "novaSenha":"novaSenha"
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "501": {
+          "description": "values error"
+        },
+        "201": {
+          "description": "senha alterada com sucesso"
+        }
+       }
+      }
+    },
+
+    "/sales": {
+
+      "post": {
+        "tags": ["Sales"],
+        "summary": "uploads an image",
+        "requestBody":{
+         "content": {
+           "multipart/form-data":{
+            "schema": {
+              "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string",
+                "format": "binary"
+              }
+            }      
+             
+          }       
+            
+         }
+
+        }
+         
+        },
+    
+        
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "houve algum erro interno"
+          }
+        }
+      },
+
+     "get": {
+        "tags": ["Sales"],
+        "responses": {
+        "200": {
+          "description": "arquivo criado com sucesso"
+        },
+        
+        "500": {
+          "description": "teve algum erro no server por favor tente novamente mais"
+        }
+        
+       }
+      },
+
+      "delete": {
+        "tags": ["Sales"],
+        "responses": {
+        "200": {
+          "description": "tabela limpa com sucesso"
+        }
+       }
+      }
+    },
+
+    "/sales/findBy":{
+      "get": {
+        "tags": ["Sales/FindBy"],
+         "parameters":[
+          {
+            "name":"id",
+            "in":"query",
+            "description":" id valido",
+            "required":true
+          },
+          {
+            "name":"limit",
+            "in":"query",
+            "description":" o limit de registros",
+            "required":false
+          },
+          {
+            "name":"offset",
+            "in":"query",
+            "description":" por qual index numerico ele ira começar",
+            "required":false
+          },
+          {
+            "name":"order",
+            "in":"query",
+            "description":" ASC ou desc",
+            "required":false
+          },
+          {
+            "name":"field",
+            "in":"query",
+            "description":" um campo da tabela valido  tipo,data,produto,valor,vendedor",
+            "required":false
+          }
+
+         ],
+        
+      "responses": {
+        "501": {
+          "description": "values error"
+        },
+        "200": {
+          "description": "created"
+        }
+       }
+      }
+    },
+
+    "/sales/aboutValues":{
+      "get": {
+        "tags": ["Sales/AboutValues"],
+         "parameters":[
+          {
+            "name":"id",
+            "in":"query",
+            "description":" id valido",
+            "required":true
+          }
+         ],
+        
+      "responses": {
+        "501": {
+          "description": "values error"
+        },
+        "200": {
+          "description": "ok"
+        }
+       }
+      }
+    }
+
+
+  }
+}

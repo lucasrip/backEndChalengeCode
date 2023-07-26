@@ -4,7 +4,7 @@ export default function cors (req:Request,res:Response,next:NextFunction){
 
   const allowedOrigins = [
     'http://localhost:3000',
-    
+    'http://localhost:5173'
   ];
 
   const origin = req.header('origin') || '';
