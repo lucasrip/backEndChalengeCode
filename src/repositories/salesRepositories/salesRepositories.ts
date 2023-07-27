@@ -1,7 +1,6 @@
 
-import IfindBy from '../../types/IfindBy';
+import IfindBy from '../../types/findBy';
 import IsaleBody from '../../types/saleBody';
-import { query } from 'express';
 const db = require('../../database');
 
 class salesRepositories
@@ -33,13 +32,15 @@ class salesRepositories
 
   async findBy(query:IfindBy){
 
-    const {id,
-      limit,
-      offset,
-      order,
-      field} = query;
+    const {
+      id,
+      limit=20,
+      offset=0,
+      order="asc",
+      field="vendedor"
+    } = query;
 
-    const fields = ["tipo","data","produto","valor","vendedor",""];
+    const fields = ["tipo","data","produto","valor","vendedor"];
 
     const isValidField =fields.some((fieldItem)=> fieldItem.toUpperCase() === field.toUpperCase())
 
@@ -70,32 +71,44 @@ class salesRepositories
   {
  
     const [vendaProdutor] = await db.query(`
-     SELECT SUM(valor) as valor FROM sales 
+     SELECT SUM(valor) as valor , COUNT(tipo) FROM sales 
      WHERE (tipo = 1 AND user_id = $1)
     `,[id]);
    
     const [vendaAfiliado] = await db.query(`
-     SELECT SUM(valor) as valor FROM sales 
+     SELECT SUM(valor) as valor , COUNT(tipo) FROM sales 
      WHERE (tipo = 2 AND user_id = $1)
     `,[id]);
    
     const [comissãoPaga] = await db.query(`
-     SELECT SUM(valor) as valor FROM sales 
+     SELECT SUM(valor) as valor , COUNT(tipo) FROM sales 
      WHERE (tipo = 3 AND user_id = $1)
     `,[id]);
     
     const [comissãoRecebida]  = await db.query(`
-     SELECT SUM(valor) as valor FROM sales 
+     SELECT SUM(valor) as valor , COUNT(tipo) FROM sales 
      WHERE (tipo = 4 AND user_id = $1)
     `,[id]);
 
-    return {
-      vendaProdutor:vendaProdutor.valor,
-      vendaAfiliado: vendaAfiliado.valor,
-      comissãoPaga:comissãoPaga.valor,
-      comissãoRecebida:comissãoRecebida.valor 
-    };
-
+    return [
+      {
+        name:"venda produtor",
+        ...vendaProdutor
+      },
+      {
+        name:"venda afiliado",
+        ...vendaAfiliado
+      },
+      {
+        name:"comissão paga",
+        ...comissãoPaga
+      },
+      {
+        name:"comissão recebida",
+        ...comissãoRecebida
+      }
+    ];
+    
   }
    
 }

@@ -55,7 +55,7 @@ class salesController
           userId: body?.id,
           sale
         }
-        await salesRepositories.create(saleBody);
+       return await salesRepositories.create(saleBody);
       })
 
       res.status(201).json("vendas salvas com sucesso");

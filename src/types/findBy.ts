@@ -4,5 +4,5 @@ export default interface IfindBy
   limit:string,
   offset:string,
   field:string;
-  order: string
+  order: string;
 }
