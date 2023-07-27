@@ -21,6 +21,14 @@ projeto fullStack de controle de vendas de produtor/afiliado
 #### 9 entre na pata database e copie tudo oque estiver dentro do arquivo schema.sql e cole no terminal que esta conectado ao banco de dados
 #### 10 use yarn dev para rodar a api e seja feliz testando as rotas
 
+## caso querira testar os endpoints  voce poder usar o swagger
+### http://localhost:3000/api-docs/#/
+
+##swagger doc
+### https://swagger.io/specification/
+
+## outros exemplos do swagger
+### https://petstore.swagger.io/#/
 
 ## Instruções de uso FrontEnd
 #### 1 clone o projeto da api  https://github.com/lucasrip/frontEndChalengeCode
