@@ -27,6 +27,7 @@ projeto fullStack de controle de vendas de produtor/afiliado
 #### 2 abra o console use yarn para baixar as depencias
 #### 3 use yarn start para rodar a aplicação
 
+## link da apresentação do projeto https://www.loom.com/embed/3e4f246527b3499bb4bf77d2a18289d3
 
 
 ## This is a challenge by Coodesh
